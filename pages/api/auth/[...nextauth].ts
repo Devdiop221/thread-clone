@@ -15,6 +15,15 @@ export const authConfig = {
         GithubProvider({
             clientId: githubId,
             clientSecret: githubSecret,
+            profile(profile) {
+                return {
+                    id: profile.id.toString(),
+                    username: profile.login,
+                    name: profile.name,
+                    email: profile.email,
+                    image: profile.avatar_url,
+                };
+            }
         }),
     ],
     adapter: PrismaAdapter(prisma),
