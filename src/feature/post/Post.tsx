@@ -2,7 +2,7 @@ import React from 'react';
 import {PostHome} from "@/src/feature/query/post.query";
 import {PostLayout} from "@/src/feature/post/PostLayout";
 import Link from "next/link";
-import {Button} from "@/components/ui/button";
+import {Button, buttonVariants} from "@/components/ui/button";
 import {Heart, MessageCircle} from "lucide-react";
 
 
@@ -16,22 +16,24 @@ export const Post = ({post}: PostProps) => {
             postId={post.id}
             createdAt={post.createdAt}
         >
-            <Link href={`/post/${post.id}`} className="text-sm text-foreground">
+            <Link href={`/posts/${post.id}`} className="text-sm text-foreground">
                 {post.content}
             </Link>
             <div className="flex gap-2 items-center">
                 <Button size="icon" variant="ghost">
                     <Heart size={20}/>
-                </Button><Button size="icon" variant="ghost">
-                <MessageCircle size={20}/>
-            </Button>
+                </Button>
+                <Link className={buttonVariants({variant: "ghost", size: "icon"})} href={`/posts/${post.id}/reply`
+                }>
+                    <MessageCircle size={20}/>
+                </Link>
             </div>
             <div>
                 <Link className="text-muted-foreground text-sm"
-                      href={`/post/${post.id}`}>{post._count.likes} likes</Link>
+                      href={`/posts/${post.id}`}>{post._count.likes} likes</Link>
                 {' · '}
                 <Link className="text-muted-foreground text-sm"
-                      href={`/post/${post.id}`}>{post._count.replies} comments</Link>
+                      href={`/posts/${post.id}`}>{post._count.replies} comments</Link>
             </div>
         </PostLayout>
     )

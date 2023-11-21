@@ -37,8 +37,7 @@ export const authConfig = {
 } satisfies NextAuthOptions;
 
 export const getAuthSession = async () => {
-    const session = await getServerSession(authConfig);
-    return session;
+    return await getServerSession(authConfig);
 }
 
 // @ts-ignore
